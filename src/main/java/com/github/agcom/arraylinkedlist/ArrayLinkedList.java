@@ -1,5 +1,8 @@
+package com.github.agcom.arraylinkedlist;
+
 /**
  * sequence <b>"index"</b> frequently used as a meaning of <b>kinda pointer</b>
+ *
  * @param <T> type of elements to be inserted and retrieved
  */
 public class ArrayLinkedList<T> {
@@ -19,7 +22,8 @@ public class ArrayLinkedList<T> {
      */
     public ArrayLinkedList(int capacity) {
 
-        if(capacity <= 0) throw new IllegalArgumentException("capacity should be positive and greater than zero; " + "capacity = " + capacity);
+        if (capacity <= 0)
+            throw new IllegalArgumentException("capacity should be positive and greater than zero; " + "capacity = " + capacity);
 
         this.previouses = new int[capacity];
         this.elements = (T[]) new Object[capacity];
@@ -36,6 +40,7 @@ public class ArrayLinkedList<T> {
 
     /**
      * adds an element to start of this list
+     *
      * @param element
      * @return index of the newly inserted element for further use (e.g. {@link #insertAfter(int, Object)}, {@link #remove(int)})
      */
@@ -45,7 +50,7 @@ public class ArrayLinkedList<T> {
 
         setEntry(insertIndex, -1, element, firstIndex);
 
-        if(firstIndex >= 0) previouses[firstIndex] = insertIndex;
+        if (firstIndex >= 0) previouses[firstIndex] = insertIndex;
 
         firstIndex = insertIndex;
 
@@ -57,20 +62,21 @@ public class ArrayLinkedList<T> {
 
     /**
      * adds an element after specified index
+     *
      * @param element
      * @return index of the newly inserted element for further use (e.g. {@link #insertAfter(int, Object)}, {@link #remove(int)})
      * @throws ArrayIndexOutOfBoundsException if index is out of capacity bounds (0 ~ capacity-1)
-     * @throws IllegalArgumentException if no element is present at the passed index
+     * @throws IllegalArgumentException       if no element is present at the passed index
      */
     public int insertAfter(int index, T element) {
 
-        if(index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
-        else if(elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
+        if (index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
+        else if (elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
 
         int insertIndex = getEmptyIndex(), next = nexts[index];
         setEntry(insertIndex, index, element, next);
         nexts[index] = insertIndex;
-        if(next >= 0) previouses[next] = insertIndex;
+        if (next >= 0) previouses[next] = insertIndex;
 
         size++;
 
@@ -82,12 +88,12 @@ public class ArrayLinkedList<T> {
      * @param index
      * @return the next element's index (which is linked to the passed index)
      * @throws ArrayIndexOutOfBoundsException if index is out of capacity bounds (0 ~ capacity-1)
-     * @throws IllegalArgumentException if no element is present at the passed index
+     * @throws IllegalArgumentException       if no element is present at the passed index
      */
     public int getNext(int index) {
 
-        if(index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
-        else if(elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
+        if (index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
+        else if (elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
 
         return nexts[index];
 
@@ -97,12 +103,12 @@ public class ArrayLinkedList<T> {
      * @param index
      * @return the previous element's index (which is linked to the passed index)
      * @throws ArrayIndexOutOfBoundsException if index is out of capacity bounds (0 ~ capacity-1)
-     * @throws IllegalArgumentException if no element is present at the passed index
+     * @throws IllegalArgumentException       if no element is present at the passed index
      */
     public int getPrevious(int index) {
 
-        if(index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
-        else if(elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
+        if (index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
+        else if (elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
 
         return previouses[index];
 
@@ -110,7 +116,7 @@ public class ArrayLinkedList<T> {
 
     public int getFirst() {
 
-        if(firstIndex < 0) throw new RuntimeException("no element assigned as first");
+        if (firstIndex < 0) throw new RuntimeException("no element assigned as first");
 
         return firstIndex;
 
@@ -120,12 +126,12 @@ public class ArrayLinkedList<T> {
      * @param index
      * @return mapped element
      * @throws ArrayIndexOutOfBoundsException if index is out of capacity bounds (0 ~ capacity-1)
-     * @throws IllegalArgumentException if no element is present at the passed index
+     * @throws IllegalArgumentException       if no element is present at the passed index
      */
     public T get(int index) {
 
-        if(index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
-        else if(elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
+        if (index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
+        else if (elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
 
         return elements[index];
 
@@ -133,23 +139,24 @@ public class ArrayLinkedList<T> {
 
     /**
      * removes the corresponding element at the pointed index
+     *
      * @param index
      * @return
      * @throws ArrayIndexOutOfBoundsException if index is out of capacity bounds (0 ~ capacity-1)
-     * @throws IllegalArgumentException if no element is present at the passed index
+     * @throws IllegalArgumentException       if no element is present at the passed index
      */
     public T remove(int index) {
 
-        if(index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
-        else if(elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
+        if (index < 0 || index >= elements.length) throw new ArrayIndexOutOfBoundsException(index);
+        else if (elements[index] == null) throw new IllegalArgumentException("no element at called index = " + index);
 
         int next = nexts[index];
         int previous = previouses[index];
 
-        if(index == firstIndex) firstIndex = next;
+        if (index == firstIndex) firstIndex = next;
 
-        if(previous >= 0) nexts[previous] = next;
-        if(next >= 0) previouses[next] = previous;
+        if (previous >= 0) nexts[previous] = next;
+        if (next >= 0) previouses[next] = previous;
 
         addEmptyIndex(index);
         size--;
@@ -189,7 +196,8 @@ public class ArrayLinkedList<T> {
 
     private int getEmptyIndex() {
 
-        if(size == elements.length) throw new RuntimeException("list is full; lastIndex = " + size + ", capacity = " + elements.length);
+        if (size == elements.length)
+            throw new RuntimeException("list is full; lastIndex = " + size + ", capacity = " + elements.length);
 
         return empties[emptyLastIndex--];
 
@@ -249,7 +257,7 @@ public class ArrayLinkedList<T> {
 
     private static void printElements(ArrayLinkedList<?> list) {
 
-        if(list == null || list.isEmpty()) return;
+        if (list == null || list.isEmpty()) return;
 
         System.out.print("[");
 
@@ -261,7 +269,7 @@ public class ArrayLinkedList<T> {
 
             currentIndex = list.getNext(currentIndex);
 
-            if(i != list.size() - 1) System.out.print(", ");
+            if (i != list.size() - 1) System.out.print(", ");
 
         }
 
