@@ -18,7 +18,7 @@ public class ArrayLinkedList<T> {
 
     /**
      * @param capacity content arrays length
-     * @throws IllegalArgumentException if capacity < 0
+     * @throws IllegalArgumentException if capacity {@literal <} 0
      */
     public ArrayLinkedList(int capacity) {
 
