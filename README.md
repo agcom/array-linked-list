@@ -6,23 +6,7 @@ An **arbitrary tool**, born out of a question, **"Design a linked list structure
 
 The idea is to take **indexes as pointers** (nodes) and beside saving each datum, save information about related elements (next / previous) in arrays.
 
-## Setup
-
-This tool is distributed as **maven** package. You can directly put it in your application.
-
-For example,
-
-- `*.gradle`:
-
-	```groovy
-	repositories {
-	    jcenter() // Make sure jcenter is added to your project repositories
-	}
-	
-	dependencies {
-	    implementation 'com.github.agcom:array-linked-list:0.1.0' // Contains `ArrayLinkedList` class
-	}
-	```
+Check the implementation class, [`ArrayLinkedList`](src/main/java/io/github/agcom/arraylinkedlist/ArrayLinkedList.java)
 
 
 ## Usage
@@ -34,7 +18,7 @@ Here is a small example,
 > Pay attention to commented lines for functionalities.
 
 ```java
-import com.github.agcom.arraylinkedlist.ArrayLinkedList;
+import io.github.agcom.arraylinkedlist.ArrayLinkedList;
 
 public final class QuickExample {
 
@@ -76,18 +60,3 @@ public final class QuickExample {
 ```
 
 > Note that, the word **node** is used to align with linked list definition; In actual, it refers to an **index**.
-
-## Comparison
-
-This section answers a question, **is it worthed?**.
-
-Comparing main operations and their **efficiency** (by order of magnitude) of this list implementation and defaults'.
-
-> `ArrayLinkedList` API is not complete.
->
-> The following table contains operations which the `ArrayLikedList` supports **directly** and aren't subject to change.
-
-| Topic | `ArrayLinkedList` | `LinkedList` | `ArrayList` |
-| :---: | :---------------: | :----------: | :---------: |
-| `get` |      `O(1)`       |    `O(n)`    |   `O(1)`    |
-|  ...  |        ...        |     ...      |     ...     |

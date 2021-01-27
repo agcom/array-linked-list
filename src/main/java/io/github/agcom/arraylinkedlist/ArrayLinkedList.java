@@ -1,4 +1,4 @@
-package com.github.agcom.arraylinkedlist;
+package io.github.agcom.arraylinkedlist;
 
 /**
  * sequence <b>"index"</b> frequently used as a meaning of <b>kinda pointer</b>

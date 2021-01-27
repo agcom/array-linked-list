@@ -1,60 +1,10 @@
 plugins {
     id 'java'
-    id 'java-library'
-    id 'maven-publish'
-    id 'com.jfrog.bintray' version "$bintray_version"
 }
 
-group = 'com.github.agcom'
+group = 'io.github.agcom'
 version = '0.1.0'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_version"
-}
-
-test { useJUnitPlatform() }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
-    withSourcesJar()
-    withJavadocJar()
-}
-
-publishing {
-    publications {
-        array_linked_list(MavenPublication) {
-            artifactId = 'array-linked-list'
-            from components.java
-            pom {
-                packaging = 'jar'
-                withXml {
-                    def root = asNode()
-                    new XmlParser().parse(buildFile.toPath().parent.resolve('pom-meta.xml').toFile()).each {
-                        root.append(it)
-                    }
-                }
-            }
-        }
-    }
-}
-
-bintray {
-    user = 'agcom'
-    key = System.env.BINTRAY_KEY
-    publications = ['array_linked_list']
-    pkg {
-        repo = 'array-linked-list'
-        name = 'root'
-        version {
-            name = project.version.toString()
-            desc = 'First release'
-            released = new Date()
-            vcsTag = "v${project.version}"
-        }
-    }
 }
