@@ -1,3 +1,5 @@
+:warning: No longer maintained, BUT, feel free to **fork** it. :wink:
+
 # Array linked list
 
 An **arbitrary tool**, born out of a question, **"Design a linked list structure only using arrays"**.
